@@ -12,7 +12,9 @@ const storeListEl: HTMLUListElement = document.querySelector('.store--item-list'
 const cartListEl: HTMLUListElement = document.querySelector('.cart--item-list')!;
 const totalNumber: HTMLSpanElement = document.querySelector('.total-number')!;
 
-const state: object = {
+const state: {store: {id:string; name:string; price:number}[];
+cart: {id:string; name:string; price:number}[]
+} = {
   store: [
     {
       id: '001-beetroot',
@@ -77,11 +79,12 @@ const state: object = {
   cart: [],
 };
 
-function getImagePath(item: any) {
+state.cart
+function getImagePath(item: {id:string}) {
   return `./assets/icons/${item.id}.svg`;
 }
 // CREATE STORE ITEMS
-function createStoreItem(item: object) {
+function createStoreItem(item: {name:string; id:string}) {
   const liEl = document.createElement('li');
 
   const iconDiv = document.createElement('div');
