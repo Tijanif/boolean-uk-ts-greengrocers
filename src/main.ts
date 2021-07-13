@@ -12,8 +12,19 @@ const storeListEl: HTMLUListElement = document.querySelector('.store--item-list'
 const cartListEl: HTMLUListElement = document.querySelector('.cart--item-list')!;
 const totalNumber: HTMLSpanElement = document.querySelector('.total-number')!;
 
-const state: {store: {id:string; name:string; price:number}[];
-cart: {id:string; name:string; price:number}[]
+type storeItem = {
+  id:string
+   name:string
+    price:number
+}
+
+type cartItem = {
+id:string
+quantity: number
+}
+
+const state: { store: storeItem[];
+cart: cartItem []
 } = {
   store: [
     {
