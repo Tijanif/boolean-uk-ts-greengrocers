@@ -120,8 +120,8 @@ function renderStoreItems() {
 
 
 //  CREATE CART ITEMS
-function createCartItem(cartItem: object) {
-  const storeItem = state.store.find(function (item: object) {
+function createCartItem(cartItem: {id:string ; name:string}) {
+  const storeItem = state.store.find(function (item) {
     return item.id === cartItem.id;
   });
 
@@ -206,7 +206,7 @@ function addItemToCart(targetItem) {
   }
 }
 
-function calculateTotal(state) {
+function calculateTotal(state: {store:[]; cart:[]}) {
   // return totalPrice = a * b
 
   // need to find state store price
