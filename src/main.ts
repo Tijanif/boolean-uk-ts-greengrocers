@@ -202,11 +202,13 @@ function renderCartItems() {
   let totalPrice = calculateTotal(state);
   // call funtion calculate Total
   // change innter text with totalnumber with result of calculate total
-  totalNumber.innerText = totalPrice;
+  let newTotalPrice = totalPrice;
+  if(newTotalPrice === undefined) return 
+  totalNumber.innerText = newTotalPrice;
 }
 
 //  ADD ALL ITEMS TO CART
-function addItemToCart(id: storeItem.id) {
+function addItemToCart(id) {
   // IS THIS ITEM ALREADY IN THE CART
   const foundItem = state.cart.find(function (cartItem) {
     return cartItem.id === id;
