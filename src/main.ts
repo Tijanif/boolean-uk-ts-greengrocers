@@ -233,9 +233,9 @@ function calculateTotal(state: {store:[]; cart:[]}) {
   // need to find state cart quantity
   let price = 0;
   for (const cartItem of state.cart) {
-    const foundItem = state.store.find(function (storeItem: storeItem) {
+    const foundItem = state.store.find(function (state: {store: storeItem; cart:cartItem}) {
       
-      return cartItem.id === storeItem.id;
+      return cartItem.id === state.store.id;
     });
     if(foundItem === undefined) return 
     price += foundItem.price * cartItem.quantity;
