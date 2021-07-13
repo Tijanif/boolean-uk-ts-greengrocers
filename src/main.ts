@@ -144,7 +144,7 @@ function createCartItem(cartItem: cartItem) {
   const cartImgEl = document.createElement('img');
   cartImgEl.setAttribute('class', 'cart--item-icon');
   cartImgEl.setAttribute('alt', storeItem.name);
-  cartImgEl.setAttribute('src', getImagePath(cartItem));
+  cartImgEl.setAttribute('src', getImagePath(storeItem));
 
   const cartPEl = document.createElement('p');
   cartPEl.innerText = storeItem.name;
@@ -166,6 +166,7 @@ function createCartItem(cartItem: cartItem) {
   cartAddBtnEl.innerText = '+';
 
   cartAddBtnEl.addEventListener('click', function () {
+
     cartSpanEl.innerText = cartItem.quantity++;
     console.log(state.cart);
     renderAllItems();
@@ -192,6 +193,7 @@ function createCartItem(cartItem: cartItem) {
 function renderCartItems() {
   for (const item of state.cart) {
     const liEl = createCartItem(item);
+    if(liEl === undefined) return 
     cartListEl.append(liEl);
   }
   let totalPrice = calculateTotal(state);
@@ -201,15 +203,15 @@ function renderCartItems() {
 }
 
 //  ADD ALL ITEMS TO CART
-function addItemToCart(targetItem) {
+function addItemToCart(id: storeItem.id) {
   // IS THIS ITEM ALREADY IN THE CART
   const foundItem = state.cart.find(function (cartItem) {
-    return cartItem.id === targetItem.id;
+    return cartItem.id === id;
   });
 
   if (foundItem === undefined) {
     const cartItem = {
-      id: targetItem.id,
+      id: id,
       quantity: 1,
     };
 
@@ -226,9 +228,11 @@ function calculateTotal(state: {store:[]; cart:[]}) {
   // need to find state cart quantity
   let price = 0;
   for (const cartItem of state.cart) {
-    const foundItem = state.store.find(function (storeItem) {
+    const foundItem = state.store.find(function (storeItem: storeItem) {
+      
       return cartItem.id === storeItem.id;
     });
+    if(foundItem === undefined) return 
     price += foundItem.price * cartItem.quantity;
 
     // for (const storeItem of state.store) {
