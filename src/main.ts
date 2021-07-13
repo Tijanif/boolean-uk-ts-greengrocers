@@ -20,7 +20,7 @@ type storeItem = {
 
 type cartItem = {
 id:string
-quantity: number
+quantity: number 
 }
 
 const state: { store: storeItem[];
@@ -166,9 +166,10 @@ function createCartItem(cartItem: cartItem) {
   cartAddBtnEl.innerText = '+';
 
   cartAddBtnEl.addEventListener('click', function () {
-
-    cartSpanEl.innerText = cartItem.quantity++;
-    console.log(state.cart);
+     
+      let newQuantity = cartItem.quantity++
+    cartSpanEl.innerText = newQuantity.toFixed();
+    
     renderAllItems();
   });
   cartRemoveBtnEl.addEventListener('click', function () {
@@ -180,7 +181,9 @@ function createCartItem(cartItem: cartItem) {
       state.cart.splice(itemIndex, 1);
       renderAllItems();
     } else {
-      cartSpanEl.innerText = cartItem.quantity--;
+        let newQuantity = cartItem.quantity--
+    cartSpanEl.innerText = newQuantity.toFixed();
+      
       renderAllItems();
     }
   });
