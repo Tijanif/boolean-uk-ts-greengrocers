@@ -91,11 +91,11 @@ cart: cartItem []
 };
 
 state.cart
-function getImagePath(item: {id:string}) {
+function getImagePath(item: storeItem) {
   return `./assets/icons/${item.id}.svg`;
 }
 // CREATE STORE ITEMS
-function createStoreItem(item: {name:string; id:string}) {
+function createStoreItem(item: storeItem) {
   const liEl = document.createElement('li');
 
   const iconDiv = document.createElement('div');
@@ -131,10 +131,12 @@ function renderStoreItems() {
 
 
 //  CREATE CART ITEMS
-function createCartItem(cartItem: {id:string ; name:string}) {
+function createCartItem(cartItem: cartItem) {
   const storeItem = state.store.find(function (item) {
     return item.id === cartItem.id;
   });
+
+  if(storeItem === undefined) return
 
   const liEl = document.createElement('li');
   liEl.setAttribute('class', 'cart-item');
@@ -156,7 +158,7 @@ function createCartItem(cartItem: {id:string ; name:string}) {
   const cartSpanEl = document.createElement('span');
   cartSpanEl.setAttribute('class', 'quantity-text center');
 
-  cartSpanEl.innerText = cartItem.quantity;
+  cartSpanEl.innerText = cartItem.quantity.toFixed();
 
   // add btn
   const cartAddBtnEl = document.createElement('button');
